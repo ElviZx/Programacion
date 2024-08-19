@@ -1,0 +1,55 @@
+from inventario import Inventario
+from producto import Producto
+
+def mostrar_menu():
+    print("1. Añadir producto")
+    print("2. Eliminar producto")
+    print("3. Actualizar producto")
+    print("4. Buscar producto por nombre")
+    print("5. Mostrar todos los productos")
+    print("6. Salir")
+
+def main():
+    inventario = Inventario()
+
+    while True:
+        mostrar_menu()
+        opcion = input("Elige una opción: ")
+
+        if opcion == '1':
+            id = input("ID del producto: ")
+            nombre = input("Nombre del producto: ")
+            cantidad = int(input("Cantidad del producto: "))
+            precio = float(input("Precio del producto: "))
+            producto = Producto(id, nombre, cantidad, precio)
+            inventario.añadir_producto(producto)
+
+        elif opcion == '2':
+            id = input("ID del producto a eliminar: ")
+            inventario.eliminar_producto(id)
+
+        elif opcion == '3':
+            id = input("ID del producto a actualizar: ")
+            cantidad = input("Nueva cantidad (dejar en blanco si no desea cambiar): ")
+            precio = input("Nuevo precio (dejar en blanco si no desea cambiar): ")
+            cantidad = int(cantidad) if cantidad else None
+            precio = float(precio) if precio else None
+            inventario.actualizar_producto(id, cantidad, precio)
+
+        elif opcion == '4':
+            nombre = input("Nombre del producto a buscar: ")
+            resultados = inventario.buscar_producto_por_nombre(nombre)
+            for prod in resultados:
+                print(prod)
+
+        elif opcion == '5':
+            inventario.mostrar_productos()
+
+        elif opcion == '6':
+            break
+
+        else:
+            print("Opción no válida. Intenta de nuevo.")
+
+if __name__ == "__main__":
+    main()
