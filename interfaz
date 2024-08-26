@@ -23,10 +23,12 @@ def main():
             precio = float(input("Precio del producto: "))
             producto = Producto(id, nombre, cantidad, precio)
             inventario.añadir_producto(producto)
+            print("Producto añadido exitosamente.")
 
         elif opcion == '2':
             id = input("ID del producto a eliminar: ")
             inventario.eliminar_producto(id)
+            print("Producto eliminado exitosamente.")
 
         elif opcion == '3':
             id = input("ID del producto a actualizar: ")
@@ -35,17 +37,22 @@ def main():
             cantidad = int(cantidad) if cantidad else None
             precio = float(precio) if precio else None
             inventario.actualizar_producto(id, cantidad, precio)
+            print("Producto actualizado exitosamente.")
 
         elif opcion == '4':
             nombre = input("Nombre del producto a buscar: ")
             resultados = inventario.buscar_producto_por_nombre(nombre)
-            for prod in resultados:
-                print(prod)
+            if resultados:
+                for prod in resultados:
+                    print(prod)
+            else:
+                print("No se encontraron productos con ese nombre.")
 
         elif opcion == '5':
             inventario.mostrar_productos()
 
         elif opcion == '6':
+            print("Saliendo del programa...")
             break
 
         else:
